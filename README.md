@@ -80,6 +80,7 @@ Accuracy: 88.08%
 ```
 
 # 2. Sentiment Analysis with CNN
+CNN is a powerful deep learning algorithm for solving particulary image classification and many other tasks. Basicially, CNN trains filters as feature identifiers and does element-wise multiplications in convolutional layers to get a feature map representing the features.
 
 ## Getting Started
 Functions and libraries for creating a CNN model were imported.
@@ -108,7 +109,7 @@ model.add(Embedding(top_words, embedding_vector_length, input_length=max_length)
 ```
 ## Creating CNN Model and Evaluation
 
-CNN is a very powerful algorithm for solving particulary image classification tasks. Since inputs are sequences in this task, I used 1D convolutional layers in the model. The model consists of 4 convolutional layers containing 32 neurons. I specified kernel size as 3. Dense layer containing 64 neurons was also added. Batch size was specified as 32 and adam optimizer was used.
+Since inputs are sequences in this task, I used 1D convolutional layers in the model. The model consists of 4 convolutional layers containing 32 neurons. I specified kernel size as 3. Dense layer containing 64 neurons was also added. Batch size was specified as 32 and adam optimizer was used.
 ```
 model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
 model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
