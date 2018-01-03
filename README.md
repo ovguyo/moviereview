@@ -55,17 +55,58 @@ LSTM, which is an often used natural language processing technique for both sent
 model.add(LSTM(100, activation = 'tanh', recurrent_activation='hard_sigmoid', dropout=0.2))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(X_train, y_train, epochs=5, batch_size=512)
+model.fit(X_train, y_train, epochs=2, batch_size=256)
 ```
  
 LSTM layer has 100 memory units. Activation function is tanh. I also used dropout to prevent overfitting in this layer. And since this is a binary classification, I needed to use a Dense layer containing only one neuron. Activation function in dense layer is sigmoid.
-Adam, which is an adaptive learning method, was used as optimizer. Batch size was specified as 512.
+Adam, which is an adaptive learning method, was used as optimizer. Batch size was specified as 256.
 
-## Evaluation with Test Set
+## Evaluation on the Test Set
 The LSTM model was evaluated with test sets and accuracy was printed.
 
 ```
-scores = model.evaluate(X_test, y_test, verbose=0)
+score, acc = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
+print("Test score: %.2f%%" % (score*100))
 ```
-Training and testing of the model for 5 epochs took ~2 hours. I obtained 87.74% accuracy.
+Training and testing of the model for 2 epochs took ~1 hour. The accuracy obtained is 88.08 %.
+
+```
+Epoch 1/2
+25000/25000 [==============================] - 819s - loss: 0.5369 - acc: 0.7096     
+Epoch 2/2
+25000/25000 [==============================] - 1051s - loss: 0.2865 - acc: 0.8846    
+Accuracy: 88.08%
+```
+
+# 2. Sentiment Analysis with CNN
+
+## Getting Started
+Functions and libraries for creating a CNN model were imported.
+```
+import numpy
+from keras.datasets import imdb
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import Conv1D, Flatten, Dropout
+from keras.layers import Embedding
+from keras.preprocessing import sequence
+```
+## Loading the Dataset, Padding and Word Embedding
+
+These are same with the operations before creating LSTM model.
+```
+numpy.random.seed(7)
+top_words = 5000
+(X_train, y_train), (X_test, y_test) = imdb.load_data(num_words=top_words)
+max_length = 500
+X_train = sequence.pad_sequences(X_train, maxlen = max_length)
+X_test = sequence.pad_sequences(X_test, maxlen = max_length)
+embedding_vector_length=32
+model = Sequential()
+model.add(Embedding(top_words, embedding_vector_length, input_length=max_length))
+```
+## Creating CNN Model
+
+CNN is very powerful algorithm for particulary image classification tasks.
+
