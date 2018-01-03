@@ -61,4 +61,10 @@ model.fit(X_train, y_train, epochs=2, batch_size=256)
 LSTM layer has 100 memory units. Activation function is tanh. I also used dropout to prevent overfitting in this layer. And since this is a binary classification, I needed to use a Dense layer containing only one neuron. Activation function in dense layer is sigmoid.
 Adam, which is an adaptive learning method, was used as optimizer. Batch size was specified as 256.
 
+## Evaluation with Test Set
+The LSTM model was evaluated with test sets and accuracy was printed.
 
+```
+scores = model.evaluate(X_test, y_test, verbose=0)
+print("Accuracy: %.2f%%" % (scores[1]*100))
+```
