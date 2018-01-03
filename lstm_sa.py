@@ -33,7 +33,7 @@ model.add(Embedding(top_words, embedding_vector_length, input_length=max_length)
 model.add(LSTM(100, activation = 'tanh', recurrent_activation='hard_sigmoid', dropout=0.2))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(X_train, y_train, epochs=1, batch_size=256)
+model.fit(X_train, y_train, epochs=5, batch_size=256)
 
 #Evaluation on the Test Set
 scores = model.evaluate(X_test, y_test, verbose=0)
