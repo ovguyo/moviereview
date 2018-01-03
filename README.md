@@ -1,4 +1,4 @@
-# Sentiment Analysis on IMDB Movie Reviews using LSTM and CNN
+# Sentiment Analysis on IMDB Movie Reviews using Keras
 
 The aim in this project is to classify IMDB movie reviews as "positive" or "negative". This is a binary classification task. I used Keras deep learning library to create an LSTM and CNN model to solve the task.
 
@@ -11,6 +11,7 @@ The dataset already exists among keras datasets. It was imported with the follow
 
 from keras.datasets import imdb
 
-#Creating LSTM Model using Keras
+# Creating LSTM Model using Keras
 
-LSTM, which is an often used natural language processing technique for both sentiment analysis, text classification and machine translation, has been preferred to solve this task. LSTM is a special kind of recurrent neural network which is capable of learning long term dependencies.
+LSTM, which is an often used natural language processing technique for both sentiment analysis, text classification and machine translation, has been preferred to solve this task. LSTM is a special kind of recurrent neural network which is capable of learning long term dependencies [1].
+
