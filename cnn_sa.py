@@ -29,7 +29,7 @@ embedding_vector_length=32
 model = Sequential()
 model.add(Embedding(top_words, embedding_vector_length, input_length=max_length))
 
-#LSTM Model
+#CNN Model
 model.add(Conv1D(64, 3, border_mode= 'same'))
 model.add(Conv1D(32, 3, border_mode= 'same'))
 model.add(Conv1D(16, 3, border_mode= 'same'))
