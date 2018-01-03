@@ -181,6 +181,7 @@ In conclusion, it is obvious that CNN has an advantage of speed in comparison wi
 ## References
 
 [1] http://ai.stanford.edu/~amaas/data/sentiment/
+
 [2] http://colah.github.io/posts/2015-08-Understanding-LSTMs/
 
 
