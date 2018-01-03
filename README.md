@@ -55,11 +55,11 @@ LSTM, which is an often used natural language processing technique for both sent
 model.add(LSTM(100, activation = 'tanh', recurrent_activation='hard_sigmoid', dropout=0.2))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(X_train, y_train, epochs=2, batch_size=256)
+model.fit(X_train, y_train, epochs=5, batch_size=512)
 ```
  
 LSTM layer has 100 memory units. Activation function is tanh. I also used dropout to prevent overfitting in this layer. And since this is a binary classification, I needed to use a Dense layer containing only one neuron. Activation function in dense layer is sigmoid.
-Adam, which is an adaptive learning method, was used as optimizer. Batch size was specified as 256.
+Adam, which is an adaptive learning method, was used as optimizer. Batch size was specified as 512.
 
 ## Evaluation with Test Set
 The LSTM model was evaluated with test sets and accuracy was printed.
@@ -68,3 +68,4 @@ The LSTM model was evaluated with test sets and accuracy was printed.
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 ```
+Training and testing of the model for 5 epochs took ~2 hours. I obtained 87.74% accuracy.
