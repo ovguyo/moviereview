@@ -4,7 +4,7 @@ The aim in this project is to classify IMDB movie reviews as "positive" or "nega
 
 # 1. Sentiment Analysis with LSTM
 ## Dataset
-A large Movie Review Dataset v1.0, which contains a set of 25,000 highly polar movie reviews for training and 25,000 for testing, has been used in this task. The dataset can be found the following link.
+A large Movie Review Dataset v1.0, which contains a set of 25,000 highly polar movie reviews for training and 25,000 for testing, has been used in this task. The dataset can be found the following link [1].
 http://ai.stanford.edu/~amaas/data/sentiment/
 
 The dataset already exists among keras datasets. It was imported with the following line and made ready to load.
@@ -49,7 +49,7 @@ model.add(Embedding(top_words, embedding_vector_length, input_length=max_length)
 So the first layer of the model is embedding layer. This will use 32 length vector to represent each word.
 
 ## Creating LSTM Model
-LSTM, which is an often used natural language processing technique for both sentiment analysis, text classification and machine translation, has been preferred to solve this task. LSTM is a special kind of recurrent neural network which is capable of learning long term dependencies [1]. LSTM is able to remember information for long periods of time as a default behavior.
+LSTM, which is an often used natural language processing technique for both sentiment analysis, text classification and machine translation, has been preferred to solve this task. LSTM is a special kind of recurrent neural network which is capable of learning long term dependencies [2]. LSTM is able to remember information for long periods of time as a default behavior.
 
 ```
 model.add(LSTM(100, activation = 'tanh', recurrent_activation='hard_sigmoid', dropout=0.2))
@@ -88,7 +88,7 @@ import numpy
 from keras.datasets import imdb
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.layers import Conv1D, Flatten, Dropout
+from keras.layers import Conv1D, Flatten, Dropout, MaxPooling1D
 from keras.layers import Embedding
 from keras.preprocessing import sequence
 ```
@@ -164,7 +164,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(X_train, y_train, epochs=3, batch_size=32)
 ```
 
-After the evaluation of this model, I observed that the accuracy was a little increased and reached 87.18% value.
+After the evaluation of this model, I observed that the accuracy was a little increased and reached 87.18% value. Training and evaluation took almost 8 minutes.
 ```
 Epoch 1/3
 25000/25000 [==============================] - 50s - loss: 0.4830 - acc: 0.7306      
@@ -175,6 +175,13 @@ Epoch 3/3
 Accuracy: 87.18%
 Test score: 30.28%
 ```
+
+In conclusion, it is obvious that CNN has an advantage of speed in comparison with LSTM. Despite of that, the accuracy obtained with LSTM (88.08 %) is a little better than accuracy of the CNN model (87.18 %).
+
+## References
+
+[1] http://ai.stanford.edu/~amaas/data/sentiment/
+[2] http://colah.github.io/posts/2015-08-Understanding-LSTMs/
 
 
 
