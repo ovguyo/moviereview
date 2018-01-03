@@ -11,7 +11,7 @@ The dataset already exists among keras datasets. It was imported with the follow
 ```
 from keras.datasets import imdb
 ```
-## Getting Start
+## Getting Started
 Functions and libraries required to create the model were imported.
 ```
 import numpy
