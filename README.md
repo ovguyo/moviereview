@@ -2,7 +2,7 @@
 
 The aim in this project is to classify IMDB movie reviews as "positive" or "negative". This is a binary classification task. I used Keras deep learning library to create an LSTM and CNN model to solve the task.
 
-# Sentiment Analysis with LSTM
+# 1. Sentiment Analysis with LSTM
 ## Dataset
 A large Movie Review Dataset v1.0, which contains a set of 25,000 highly polar movie reviews for training and 25,000 for testing, has been used in this task. The dataset can be found the following link.
 http://ai.stanford.edu/~amaas/data/sentiment/
@@ -48,15 +48,17 @@ model.add(Embedding(top_words, embedding_vector_length, input_length=max_length)
 ```
 So the first layer of the model is embedding layer. This will use 32 length vector to represent each word.
 
-## Creating LSTM Model using Keras
+## Creating LSTM Model
 LSTM, which is an often used natural language processing technique for both sentiment analysis, text classification and machine translation, has been preferred to solve this task. LSTM is a special kind of recurrent neural network which is capable of learning long term dependencies [1]. LSTM is able to remember information for long periods of time as a default behavior.
 
 ```
 model.add(LSTM(100, activation = 'tanh', recurrent_activation='hard_sigmoid', dropout=0.2))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(X_train, y_train, epochs=1, batch_size=256)
+model.fit(X_train, y_train, epochs=2, batch_size=256)
 ```
-
+ 
+LSTM layer has 100 memory units. Activation function is tanh. I also used dropout to prevent overfitting in this layer. And since this is a binary classification, I needed to use a Dense layer containing only one neuron. 
+Adam, which is an adaptive learning method, was used as optimizer. Batch size was specified as 256.
 
 
