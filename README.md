@@ -1,4 +1,4 @@
-# Sentiment Analysis on IMDB Movie Reviews using Keras
+# Sentiment Analysis on IMDB Movie Review Dataset using Keras
 
 The aim in this project is to classify IMDB movie reviews as "positive" or "negative". This is a binary classification task. I used Keras deep learning library to create an LSTM and CNN model to solve the task.
 
