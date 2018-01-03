@@ -106,9 +106,9 @@ embedding_vector_length=32
 model = Sequential()
 model.add(Embedding(top_words, embedding_vector_length, input_length=max_length))
 ```
-## Creating CNN Model
+## Creating CNN Model and Evaluation
 
-CNN is a very powerful algorithm for solving particulary image classification tasks. Since inputs are sequences in this task, I used 1D convolutional layers in the model. The model consists of 4 convolutional layers containing 32 neurons. I specified kernel size as 3.
+CNN is a very powerful algorithm for solving particulary image classification tasks. Since inputs are sequences in this task, I used 1D convolutional layers in the model. The model consists of 4 convolutional layers containing 32 neurons. I specified kernel size as 3. Dense layer containing 64 neurons was also added. Batch size was specified as 32 and adam optimizer was used.
 ```
 model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
 model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
@@ -122,4 +122,59 @@ model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.fit(X_train, y_train, epochs=5, batch_size=32)
 ```
+
+Evaluation on the test set:
+```
+score, acc = model.evaluate(X_test, y_test, verbose=0)
+print("Accuracy: %.2f%%" % (acc*100))
+print("Test score: %.2f%%" % (score*100))
+```
+
+For 5 epochs, results are in below. The accuracy obtained is 85.25%.
+```
+Epoch 1/5
+25000/25000 [==============================] - 107s - loss: 0.3828 - acc: 0.8177     
+Epoch 2/5
+25000/25000 [==============================] - 104s - loss: 0.2427 - acc: 0.9041     
+Epoch 3/5
+25000/25000 [==============================] - 103s - loss: 0.1591 - acc: 0.9433     
+Epoch 4/5
+25000/25000 [==============================] - 101s - loss: 0.0877 - acc: 0.9720     
+Epoch 5/5
+25000/25000 [==============================] - 102s - loss: 0.0606 - acc: 0.9818     
+Accuracy: 85.25%
+Test score: 53.78%
+```
+
+Since there is a big difference between training and test accuracy, I changed the model a little different by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers and number of epochs so as to boost the model and prevent overfitting. The new model can be seen below.
+```
+model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
+model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
+model.add(MaxPooling1D(pool_size=2))
+model.add(Conv1D(16, kernel_size= 3, padding= 'same'))
+model.add(MaxPooling1D(pool_size=2))
+model.add(Conv1D(16, kernel_size= 3, padding= 'same'))
+model.add(MaxPooling1D(pool_size=2))
+model.add(Flatten())
+model.add(Dropout(0.2))
+model.add(Dense(64, activation='sigmoid'))
+model.add(Dropout(0.5))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=3, batch_size=32)
+```
+
+After the evaluation of this model, I observed that the accuracy was a little increased and reached 87.18% value.
+```
+Epoch 1/3
+25000/25000 [==============================] - 50s - loss: 0.4830 - acc: 0.7306      
+Epoch 2/3
+25000/25000 [==============================] - 49s - loss: 0.2615 - acc: 0.9010     
+Epoch 3/3
+25000/25000 [==============================] - 49s - loss: 0.2245 - acc: 0.9168     
+Accuracy: 87.18%
+Test score: 30.28%
+```
+
+
 
