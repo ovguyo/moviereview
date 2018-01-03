@@ -108,5 +108,18 @@ model.add(Embedding(top_words, embedding_vector_length, input_length=max_length)
 ```
 ## Creating CNN Model
 
-CNN is very powerful algorithm for particulary image classification tasks.
+CNN is a very powerful algorithm for solving particulary image classification tasks. Since inputs are sequences in this task, I used 1D convolutional layers in the model. The model consists of 4 convolutional layers containing 32 neurons. I specified kernel size as 3.
+```
+model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
+model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
+model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
+model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
+model.add(Flatten())
+model.add(Dropout(0.2))
+model.add(Dense(64, activation='sigmoid'))
+model.add(Dropout(0.2))
+model.add(Dense(1, activation='sigmoid'))
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.fit(X_train, y_train, epochs=5, batch_size=32)
+```
 
