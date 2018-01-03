@@ -23,7 +23,7 @@ from keras.layers import Embedding
 from keras.preprocessing import sequence
 ```
 ## Loading IMDB Dataset
-I kept the top 5000 words from the dataset, also splited it into two equal amount of training and test sets.
+I kept the top 5000 words from the dataset, also splited the dataset into two equal parts which are training and test sets.
 
 ```
 numpy.random.seed(7)
@@ -146,7 +146,7 @@ Accuracy: 85.25%
 Test score: 53.78%
 ```
 
-Since there is a big difference between training and test accuracy, I changed the model a little different by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers and number of epochs so as to boost the model and prevent overfitting. The new model can be seen below.
+Since there is a big difference between training and test accuracy, I changed the model a little by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers and number of epochs so as to boost the model and prevent overfitting. The new model can be seen below.
 ```
 model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
 model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
@@ -164,7 +164,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(X_train, y_train, epochs=3, batch_size=32)
 ```
 
-After the evaluation of this model, I observed that the accuracy was a little increased and reached 87.18% value. Training and evaluation took almost 8 minutes.
+After the evaluation of this model, I observed that the accuracy was a little increased and reached to 87.18 % value. Training and evaluation took almost 8 minutes.
 ```
 Epoch 1/3
 25000/25000 [==============================] - 50s - loss: 0.4830 - acc: 0.7306      
