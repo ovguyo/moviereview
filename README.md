@@ -4,6 +4,7 @@ A large Movie Review Dataset v1.0, which contains a set of 25,000 highly polar m
 http://ai.stanford.edu/~amaas/data/sentiment/
 
 The dataset already exists among keras datasets. It was imported with the following line and made ready to load.
+
 from keras.datasets import imdb
 
 
