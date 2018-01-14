@@ -131,20 +131,26 @@ print("Accuracy: %.2f%%" % (acc*100))
 print("Test score: %.2f%%" % (score*100))
 ```
 
-For 5 epochs, results are in below. The accuracy obtained is 85.25%.
+For 5 epochs, results are in below. The accuracy obtained is 84.67%.
 ```
-Epoch 1/5
-25000/25000 [==============================] - 107s - loss: 0.3828 - acc: 0.8177     
-Epoch 2/5
-25000/25000 [==============================] - 104s - loss: 0.2427 - acc: 0.9041     
-Epoch 3/5
-25000/25000 [==============================] - 103s - loss: 0.1591 - acc: 0.9433     
-Epoch 4/5
-25000/25000 [==============================] - 101s - loss: 0.0877 - acc: 0.9720     
-Epoch 5/5
-25000/25000 [==============================] - 102s - loss: 0.0606 - acc: 0.9818     
-Accuracy: 85.25%
-Test score: 53.78%
+Epoch 1/3
+25000/25000 [==============================] - 101s - loss: 0.3829 - acc: 0.8176   
+Epoch 2/3
+25000/25000 [==============================] - 100s - loss: 0.2427 - acc: 0.9042   
+Epoch 3/3
+25000/25000 [==============================] - 107s - loss: 0.1590 - acc: 0.9428      
+Accuracy: 84.67%
+Test score: 39.92%
+```
+Precision, recall and F-score are also printed.
+
+```
+             precision    recall  f1-score   support
+
+        pos       0.85      0.85      0.85     12500
+        neg       0.85      0.85      0.85     12500
+
+avg / total       0.85      0.85      0.85     25000
 ```
 
 Since there is a big difference between training and test accuracy, I changed the model a little by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers and number of epochs so as to boost the model and prevent overfitting. The new model can be seen below.
