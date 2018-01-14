@@ -153,6 +153,8 @@ Precision, recall and F-score are also printed.
 avg / total       0.85      0.85      0.85     25000
 ```
 
+![alt text] https://github.com/ovguyo/moviereview/blob/master/cnnsa1.png
+
 Since there is a big difference between training and test accuracy, I changed the model a little by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers and number of epochs so as to boost the model and prevent overfitting. The new model can be seen below.
 ```
 model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
