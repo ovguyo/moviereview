@@ -124,11 +124,22 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(X_train, y_train, epochs=5, batch_size=32)
 ```
 
-Evaluation on the test set:
+Evaluation on the test set, calculation of accuracy, precision, recall, F-score and visualization of Confusion Matrix:
 ```
 score, acc = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (acc*100))
 print("Test score: %.2f%%" % (score*100))
+from sklearn.metrics import classification_report,confusion_matrix
+y_pred = model.predict_classes(np.array(X_test))
+from sklearn import metrics
+print(metrics.accuracy_score(y_test, y_pred))
+target_names = ['pos', 'neg']
+cnf_matrix_test = confusion_matrix(y_test, y_pred)
+print(classification_report(y_test, y_pred, target_names=target_names))
+print(cnf_matrix_test)
+df_cm = pd.DataFrame(cnf_matrix_test, range(2), range(2))
+sn.set(font_scale=1.4)
+sn.heatmap(df_cm, annot=True, fmt='d')
 ```
 
 For 5 epochs, results are in below. The accuracy obtained is 84.67%.
@@ -142,7 +153,7 @@ Epoch 3/3
 Accuracy: 84.67%
 Test score: 39.92%
 ```
-Precision, recall and F-score are also printed.
+Precision, recall and F-score are printed.
 
 ```
              precision    recall  f1-score   support
@@ -152,10 +163,11 @@ Precision, recall and F-score are also printed.
 
 avg / total       0.85      0.85      0.85     25000
 ```
+Confusion matrix can be seen below.
 
-![alt text] https://github.com/ovguyo/moviereview/blob/master/cnnsa1.png
+![cnnsa1](https://user-images.githubusercontent.com/35049725/34922190-d7f5b5f8-f98c-11e7-8d24-1e022963d035.png)
 
-Since there is a big difference between training and test accuracy, I changed the model a little by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers and number of epochs so as to boost the model and prevent overfitting. The new model can be seen below.
+Since there is a big difference between training and test accuracy, I changed the model a little by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers so as to boost the model and prevent overfitting. The new model can be seen below.
 ```
 model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
 model.add(Conv1D(32, kernel_size= 3, padding= 'same'))
@@ -173,17 +185,30 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(X_train, y_train, epochs=3, batch_size=32)
 ```
 
-After the evaluation of this model, I observed that the accuracy was a little increased and reached to 87.18 % value. Training and evaluation took almost 8 minutes.
+After the evaluation of this model, I observed that the accuracy was a little increased and reached to 88.01 % value. Training and evaluation took almost 8 minutes.
 ```
 Epoch 1/3
-25000/25000 [==============================] - 50s - loss: 0.4830 - acc: 0.7306      
+25000/25000 [==============================] - 53s - loss: 0.4276 - acc: 0.7770      
 Epoch 2/3
-25000/25000 [==============================] - 49s - loss: 0.2615 - acc: 0.9010     
+25000/25000 [==============================] - 51s - loss: 0.2580 - acc: 0.8989     
 Epoch 3/3
-25000/25000 [==============================] - 49s - loss: 0.2245 - acc: 0.9168     
-Accuracy: 87.18%
-Test score: 30.28%
+25000/25000 [==============================] - 50s - loss: 0.2241 - acc: 0.9151     
+Accuracy: 88.01%
+Test score: 28.89%   
 ```
+
+```
+precision    recall  f1-score   support
+
+        pos       0.88      0.88      0.88     12500
+        neg       0.88      0.88      0.88     12500
+
+avg / total       0.88      0.88      0.88     25000
+
+```
+Confusion Matrix:
+
+![cnnsa2](https://user-images.githubusercontent.com/35049725/34922329-b6726730-f98e-11e7-95dc-128af4ac8a48.png)
 
 In conclusion, it is obvious that CNN has an advantage of speed in comparison with LSTM. Despite of that, the accuracy obtained with LSTM (88.08 %) is a little better than accuracy of the CNN model (87.18 %).
 
