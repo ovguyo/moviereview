@@ -100,7 +100,9 @@ Test score: 31.82%
 
 avg / total       0.87      0.86      0.86     25000
 ```
+
 Confusion matrix:
+
 ![lstmcm](https://user-images.githubusercontent.com/35049725/34943885-c766acc6-f9fd-11e7-9e7c-e57a713babb3.png)
 
 According to the confusion matrix, 10112 positive reviews were correctly predicted (True Positive) and 11491 negative samples were correctly predicted (True Negative). And number of incorrect predictions are 2388 (False Positive) and 1009 (False Negative).
