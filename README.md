@@ -167,6 +167,19 @@ Confusion matrix can be seen below.
 
 ![cnnsa1](https://user-images.githubusercontent.com/35049725/34922190-d7f5b5f8-f98c-11e7-8d24-1e022963d035.png)
 
+According to the confusion matrix, 10566 positive reviews were correctly predicted (True Positive) and 10601 negative samples were correctly predicted (True Negative). And number of incorrect predictions are 1899 (False Positive) and 1934 (False Negative).
+
+To calculate misclassification rate:
+```
+TP = cnf_matrix_test[1, 1]
+TN = cnf_matrix_test[0, 0]
+FP = cnf_matrix_test[0, 1]
+FN = cnf_matrix_test[1, 0]
+classification_error = (FP + FN) / float(TP + TN + FP + FN)
+print(classification_error)
+```
+It was calculated as 0.15332.
+
 Since there is a big difference between training and test accuracy, I changed the model a little by adding pooling layers, dropout and reducing the number of neurons in the convolutional layers so as to boost the model and prevent overfitting. The new model can be seen below.
 ```
 model.add(Conv1D(32, kernel_size= 3, padding= 'same', input_shape=(max_length, embedding_vector_length)))
@@ -196,7 +209,6 @@ Epoch 3/3
 Accuracy: 88.01%
 Test score: 28.89%   
 ```
-
 ```
 precision    recall  f1-score   support
 
@@ -209,6 +221,9 @@ avg / total       0.88      0.88      0.88     25000
 Confusion Matrix:
 
 ![cnnsa2](https://user-images.githubusercontent.com/35049725/34922329-b6726730-f98e-11e7-95dc-128af4ac8a48.png)
+
+According to the confusion matrix, 10963 positive reviews were correctly predicted (True Positive) and 11040 negative samples were correctly predicted (True Negative). And number of incorrect predictions are 1460 (False Positive) and 1537 (False Negative).
+Misclassification rate was calculated as. 0.11988.
 
 In conclusion, it is obvious that CNN has an advantage of speed in comparison with LSTM. Despite of that, the accuracy obtained with LSTM (88.08 %) is a little better than accuracy of the CNN model (87.18 %).
 
