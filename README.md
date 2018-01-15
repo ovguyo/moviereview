@@ -85,8 +85,11 @@ CNN is a powerful deep learning algorithm for solving particulary image classifi
 ## Getting Started
 Functions and libraries for creating a CNN model were imported.
 ```
-import numpy
+import numpy as np
+import seaborn as sn
+import pandas as pd
 from keras.datasets import imdb
+import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Conv1D, Flatten, Dropout, MaxPooling1D
@@ -97,7 +100,7 @@ from keras.preprocessing import sequence
 
 These are same with the operations before creating LSTM model.
 ```
-numpy.random.seed(7)
+np.random.seed(7)
 top_words = 5000
 (X_train, y_train), (X_test, y_test) = imdb.load_data(num_words=top_words)
 max_length = 500
