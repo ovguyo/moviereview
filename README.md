@@ -62,21 +62,58 @@ LSTM layer has 100 memory units. Activation function is tanh. I also used dropou
 Adam, which is an adaptive learning method, was used as optimizer. Batch size was specified as 256.
 
 ## Evaluation on the Test Set
-The LSTM model was evaluated with test sets and accuracy was printed.
+
+The LSTM model was evaluated on test sets and accuracy, precision, recall, F-score Confusion Matrix: were printed.
 
 ```
 score, acc = model.evaluate(X_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 print("Test score: %.2f%%" % (score*100))
+from sklearn.metrics import classification_report,confusion_matrix
+y_pred = model.predict_classes(np.array(X_test))
+from sklearn import metrics
+print(metrics.accuracy_score(y_test, y_pred))
+target_names = ['pos', 'neg']
+cnf_matrix_test = confusion_matrix(y_test, y_pred)
+print(classification_report(y_test, y_pred, target_names=target_names))
+print(cnf_matrix_test)
+df_cm = pd.DataFrame(cnf_matrix_test, range(2), range(2))
+sn.set(font_scale=1.4)
+sn.heatmap(df_cm, annot=True, fmt='d')
+
 ```
-Training and testing of the model for 2 epochs took ~1 hour. The accuracy obtained is 88.08 %.
+Training and testing of the model for 2 epochs took ~1 hour. The accuracy obtained is 86.41 %.
 
 ```
 Epoch 1/2
-25000/25000 [==============================] - 819s - loss: 0.5369 - acc: 0.7096     
+25000/25000 [==============================] - 858s - loss: 0.5865 - acc: 0.6908     
 Epoch 2/2
-25000/25000 [==============================] - 1051s - loss: 0.2865 - acc: 0.8846    
-Accuracy: 88.08%
+25000/25000 [==============================] - 1054s - loss: 0.3168 - acc: 0.8680     
+Accuracy: 86.41%
+Test score: 31.82%
+```
+```
+               precision    recall  f1-score   support
+
+        pos       0.83      0.92      0.87     12500
+        neg       0.91      0.81      0.86     12500
+
+avg / total       0.87      0.86      0.86     25000
+```
+Confusion matrix:
+![lstmcm](https://user-images.githubusercontent.com/35049725/34943885-c766acc6-f9fd-11e7-9e7c-e57a713babb3.png)
+
+According to the confusion matrix, 10112 positive reviews were correctly predicted (True Positive) and 11491 negative samples were correctly predicted (True Negative). And number of incorrect predictions are 2388 (False Positive) and 1009 (False Negative).
+
+Misclassification rate is calculated and found as 0.13588.
+```
+TP = cnf_matrix_test[1, 1]
+TN = cnf_matrix_test[0, 0]
+FP = cnf_matrix_test[0, 1]
+FN = cnf_matrix_test[1, 0]
+
+classification_error = (FP + FN) / float(TP + TN + FP + FN)
+print(classification_error)
 ```
 
 # 2. Sentiment Analysis with CNN
@@ -201,7 +238,7 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(X_train, y_train, epochs=3, batch_size=32)
 ```
 
-After the evaluation of this model, I observed that the accuracy was a little increased and reached to 88.01 % value. Training and evaluation took almost 8 minutes.
+After the evaluation of this model, I observed that the accuracy was a little increased and reached to 88.01 % value. Training and evaluation took almost 10 minutes.
 ```
 Epoch 1/3
 25000/25000 [==============================] - 53s - loss: 0.4276 - acc: 0.7770      
@@ -228,7 +265,13 @@ Confusion Matrix:
 According to the confusion matrix, 10963 positive reviews were correctly predicted (True Positive) and 11040 negative samples were correctly predicted (True Negative). And number of incorrect predictions are 1460 (False Positive) and 1537 (False Negative).
 Misclassification rate was calculated as. 0.11988.
 
-In conclusion, CNN has an advantage of speed in comparison with LSTM. The accuracy obtained with LSTM (88.08 %) is a little better than accuracy of the CNN model (88.01 %).
+#Conclusion
+
+The table comparing the architectures and results is given below.
+
+![tablo](https://user-images.githubusercontent.com/35049725/34944345-84d0ee60-f9ff-11e7-8ab1-0f6fc0f678f5.png)
+
+ According to the table, the best performance based on accuracy and training duration belongs to the second CNN architecture.
 
 ## References
 
