@@ -225,7 +225,7 @@ Confusion Matrix:
 According to the confusion matrix, 10963 positive reviews were correctly predicted (True Positive) and 11040 negative samples were correctly predicted (True Negative). And number of incorrect predictions are 1460 (False Positive) and 1537 (False Negative).
 Misclassification rate was calculated as. 0.11988.
 
-In conclusion, it is obvious that CNN has an advantage of speed in comparison with LSTM. Despite of that, the accuracy obtained with LSTM (88.08 %) is a little better than accuracy of the CNN model (87.18 %).
+In conclusion, CNN has an advantage of speed in comparison with LSTM. The accuracy obtained with LSTM (88.08 %) is a little better than accuracy of the CNN model (88.01 %).
 
 ## References
 
