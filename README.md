@@ -252,7 +252,7 @@ Accuracy: 88.01%
 Test score: 28.89%   
 ```
 ```
-precision    recall  f1-score   support
+              precision    recall  f1-score   support
 
         pos       0.88      0.88      0.88     12500
         neg       0.88      0.88      0.88     12500
