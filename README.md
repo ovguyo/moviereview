@@ -274,6 +274,13 @@ The table comparing the architectures and results is given below.
 ![tablo](https://user-images.githubusercontent.com/35049725/34944345-84d0ee60-f9ff-11e7-8ab1-0f6fc0f678f5.png)
 
  According to the table, the best performance based on accuracy and training duration belongs to the second CNN architecture.
+ 
+ #DEMO
+ 
+ Weights and pretrained CNN model were saved to model_cnn.h5 and model_cnn.json files. 
+ You can test the reviews that you will give as an input to the text box using demo_cnn(2).ipynb. The performance is not so good when you write short sentences. 
+Here is an example to copy and test some reviews for Zodiac movie.
+https://mubi.com/films/zodiac
 
 ## References
 
