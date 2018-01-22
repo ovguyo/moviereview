@@ -267,7 +267,7 @@ Confusion Matrix:
 According to the confusion matrix, 10963 positive reviews were correctly predicted (True Positive) and 11040 negative samples were correctly predicted (True Negative). And number of incorrect predictions are 1460 (False Positive) and 1537 (False Negative).
 Misclassification rate was calculated as. 0.11988.
 
-#Conclusion
+# Conclusion
 
 The table comparing the architectures and results is given below.
 
@@ -275,7 +275,7 @@ The table comparing the architectures and results is given below.
 
  According to the table, the best performance based on accuracy and training duration belongs to the second CNN architecture.
  
- #DEMO
+ # DEMO
  
  Weights and pretrained CNN model were saved to model_cnn.h5 and model_cnn.json files. 
  You can test the reviews that you will give as an input to the text box using demo_cnn(2).ipynb. The performance is not so good when you write short sentences. 
